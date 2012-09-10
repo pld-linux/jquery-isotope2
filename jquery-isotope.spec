@@ -1,7 +1,7 @@
 # TODO
 # - paths and deps for demo
 %define		plugin	isotope
-Summary:	jQuery Facebook-style lightbox
+Summary:	jQuery plugin for magical layouts: filtering, sorting, and dynamic layouts
 Name:		jquery-%{plugin}
 Version:	1.5.18
 Release:	1
