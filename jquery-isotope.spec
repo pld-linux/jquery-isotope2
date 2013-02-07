@@ -3,14 +3,15 @@
 %define		plugin	isotope
 Summary:	jQuery plugin for magical layouts: filtering, sorting, and dynamic layouts
 Name:		jquery-%{plugin}
-Version:	1.5.18
+Version:	1.5.25
 Release:	1
 License:	Free for non-commercial use
 Group:		Applications/WWW
 Source0:	https://github.com/desandro/isotope/tarball/v%{version}/%{name}-%{version}.tgz
-# Source0-md5:	a3aa4e827877abc47ba72b4c06146311
+# Source0-md5:	f1ac4f073fdf753da8465e9727221e10
 URL:		http://isotope.metafizzy.co/
 BuildRequires:	rpmbuild(macros) >= 1.268
+BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 BuildRequires:	yuicompressor
 Requires:	jquery >= 1.2
@@ -36,6 +37,12 @@ Demonstrations and samples for jQuery.%{plugin}.
 %setup -qc
 mv *-%{plugin}-*/* .
 
+# split "reset css" out of main css
+cp css/style.css css/base.css
+cp css/style.css css/base.css.orig
+%{__sed} -i -e '/Base styles/,$d' css/style.css
+%{__sed} -i -e '1,/Base styles/d' css/base.css
+
 %build
 install -d build/css
 
@@ -59,6 +66,10 @@ ln -s %{plugin}-%{version}.min.js $RPM_BUILD_ROOT%{_appdir}/%{plugin}.js
 cp -p build/css/style.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}-%{version}.min.css
 cp -p css/style.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}-%{version}.css
 ln -s %{plugin}-%{version}.min.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}.css
+
+cp -p build/css/base.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}-base-%{version}.min.css
+cp -p css/base.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}-base-%{version}.css
+ln -s %{plugin}-base-%{version}.min.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}-base.css
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 cp -a index.html $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
