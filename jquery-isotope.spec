@@ -5,7 +5,7 @@ Summary:	jQuery plugin for magical layouts: filtering, sorting, and dynamic layo
 Name:		jquery-%{plugin}
 Version:	1.5.26
 Release:	1
-License:	Free for non-commercial use
+License:	MIT, Free for non-commercial use
 Group:		Applications/WWW
 Source0:	https://github.com/desandro/isotope/tarball/v%{version}/%{name}-%{version}.tgz
 # Source0-md5:	614a642e2afb7d6059661672d817d205
